@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Hand-Cricket</title>
+  </head>
+  <body class="text-white" style="background-color: #141414;">
+    <div class="container">
+      <div>
+        <h1 class="text-center display-3 bg-secondary">Hand Cricket</h1>
+      </div>
+      <div id="win-msg"></div>
+      <!-- Button trigger modal -->
+      <div class="clearfix text-center">
+      <button
+        type="button"
+        class="btn btn-primary float-left"
+        id="toss"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+      >
+        TOSS
+      </button>
+      <button class="btn-danger btn float-right" id="restart">Restart</button>
+    </div>
+      <br />
+      <hr class="bg-white"/>
+      <br />
+      <div id="first-batting">
+        <h3 class="text-center text-monospace border-bottom mb-5 pb-3">BATTING</h3>
+        <div id="out-msg"></div>
+        <div id="your-score" class="clearfix">
+          <h6 id="target" class="float-left"></h6>
+          <h6 id="total-user-score" class="float-right">total (user): 0</h6>
+        </div>
+        <div class="selections">
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="1">1</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="2">2</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="3">3</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="4">4</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="5">5</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="6">6</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="7">7</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="8">8</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="9">9</button>
+          <button class="selection number btn-secondary btn mr-3" data-battingnumber="10">10</button>
+        </div>
+        <div id="over" class="text-center" style="font-size: 2rem;"></div>
+        <div class="results">
+          <div id="comp-result">COMPUTER (bowl)</div>
+          <div data-final-column>YOU (bat)</div>
+        </div>
+      </div>
+      <br />
+      <hr class="bg-white"/>
+      <br />
+      <div id="first-bowling">
+        <h3 class="text-center text-monospace border-bottom mb-5 pb-3">BOWLING</h3>
+        <div id="out-msg-1"></div>
+        <div id="your-score" class="clearfix">
+          <h6 id="target-1" class="float-left"></h6>
+          <h6 id="total-comp-score" class="float-right">total (computer): 0</h6>
+        </div>
+        <div class="selections mt-3 mb-3">
+          <button class="selection number btn-secondary btn mr-3 " data-bowlingnumber="1">1</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="2">2</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="3">3</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="4">4</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="5">5</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="6">6</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="7">7</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="8">8</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="9">9</button>
+          <button class="selection number btn-secondary btn mr-3" data-bowlingnumber="10">10</button>
+        </div>
+        <div id="over-1" class="text-center" style="font-size: 2rem;"></div>
+        <div class="results">
+          <div id="comp-result">YOU (bowl)</div>
+          <div data-final-column-1>COMPUTER (bat)</div>
+        </div>
+      </div>
+      <br />
+      <hr class="bg-white" />
+      <br />
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                TOSS
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <br />
+            </div>
+            <div class="modal-body">
+              <div id="score" class="clearfix">
+                <h6 id="comp" class="float-left text-dark">computer chose: 0</h6>
+                <h6 id="total-toss" class="float-right text-dark">total: 0</h6>
+              </div>
+              <div id="msg"></div>
+              <div class="selections">
+                <button class="selection" id="odd" data-selection="odd">
+                  ODD
+                </button>
+                <button class="selection" id="even" data-selection="even">
+                  EVEN
+                </button>
+              </div>
+              <div class="selections">
+                <button class="selection number" data-number="1">1</button>
+                <button class="selection number" data-number="2">2</button>
+                <button class="selection number" data-number="3">3</button>
+                <button class="selection number" data-number="4">4</button>
+                <button class="selection number" data-number="5">5</button>
+                <button class="selection number" data-number="6">6</button>
+              </div>
+              <div class="selections">
+                <button class="selection" id="bat" data-choose="bat">
+                  BAT
+                </button>
+                <button class="selection" id="bowl" data-choose="bowl">
+                  BOWL
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="main.js"></script>
+</html>
